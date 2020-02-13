@@ -1,0 +1,76 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.inputArea {
+  height: 35px;
+  width: 40%;
+  border-radius: 30px;
+  outline: none;
+  border: none;
+  padding: 0 0 0 10px;
+  font-style: italic;
+  margin: 20px 0;
+}
+.todo {
+  width: 100%;
+  background-color: #667aca;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.todoItem {
+  background-color: #a7b3f3;
+  border: #a7b3f3 1px solid;
+  margin: 5px 0;
+  padding: 5px;
+  color: white;
+  width: 80%;
+  font-size: 160%;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: relative;
+}
+:global(.done) {
+  text-decoration: line-through;
+  color: #c7c7c7;
+}
+.todoItem:hover {
+  border: white 1px solid;
+}
+.todoItemInput:checked {
+  background: #586bb6;
+  outline: none;
+}
+.todoItemInput {
+  outline: none;
+  width: 28px;
+  height: 28px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  margin: 5px;
+  position: relative;
+  -webkit-appearance: none;
+}
+.todoItemInput:checked::after {
+  content: "";
+  top: 8px;
+  left: 8px;
+  position: absolute;
+  border: #fff solid 2px;
+  border-top: none;
+  border-right: none;
+  height: 6px;
+  width: 10px;
+  transform: rotate(-45deg);
+}
+.todoItemDel {
+  position: absolute;
+  right: 10px;
+  display: none;
+}
+.todoItemDel:hover {
+  cursor: pointer;
+}
