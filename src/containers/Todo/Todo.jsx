@@ -90,7 +90,7 @@ export default class Todo extends React.Component {
   render() {
     return (
       <div className={css.todo}>
-        <input className={css.inputArea} placeholder="What needs to be done?" onKeyDown={this.addTodo} />
+        <input className={css.todoInputArea} placeholder="What needs to be done?" onKeyDown={this.addTodo} />
         {this.state.todos.map((item, index) => {
           return (
             <div key={index} className={css.todoItem} onMouseOver={this.showDelIcon} onMouseOut={this.hideDelIcon}>

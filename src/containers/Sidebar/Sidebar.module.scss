@@ -1,23 +1,21 @@
 .sidebar {
   width: 300px;
   height: 100%;
-}
-.subbar {
   display: flex;
   flex-direction: column;
 }
-.subbarItem {
+.sidebarItem {
   height: 50px;
   display: flex;
   align-items: center;
   font-size: 95%;
   padding: 0 0 0 30px;
 }
-.subbarIcon {
+.sidebarIcon {
   height: 17px;
   width: 17px;
   margin: 0 10px 0 0;
 }
-.currentSubbarItem {
+.currentSidebarItem {
   background-color: #f5f7f7;
 }
