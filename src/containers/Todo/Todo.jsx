@@ -5,9 +5,9 @@ export default class Todo extends React.Component {
   constructor() {
     super();
     this.state = {
-      todos: ["吃饭", "睡觉", "打豆豆"],
+      todos: ["吃饭", "睡觉", "打豆豆", "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊"],
       dones: [],
-      undones: ["吃饭", "睡觉", "打豆豆"]
+      undones: ["吃饭", "睡觉", "打豆豆", "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊"]
     };
   }
   addTodo = (e) => {
@@ -27,16 +27,18 @@ export default class Todo extends React.Component {
     let curTodoSpan = e.currentTarget.nextSibling;
     let curTodo = e.currentTarget.nextSibling.innerText;
     let { dones, undones } = this.state;
+    console.log("curTodo:", curTodo);
     if (e.currentTarget.checked) {
       curTodoSpan.className = "done";
       dones.push(curTodo);
       undones.splice(undones.indexOf(curTodo), 1);
     } else {
-      curTodoSpan.className = "";
+      curTodoSpan.className = css.todoItemText;
       undones.push(curTodo);
       dones.splice(dones.indexOf(curTodo), 1);
     }
     this.setState({ dones: dones, undones: undones });
+    console.log(this.state.todos, this.state.dones, this.state.undones);
   };
   delTodo = (e) => {
     let curTodo = e.currentTarget.parentNode.children[1].innerText;
@@ -51,12 +53,39 @@ export default class Todo extends React.Component {
       undones.splice(undones.indexOf(curTodo), 1);
     }
     this.setState({ todos: todos, dones: dones, undones: undones });
+    console.log(this.state.todos, this.state.dones, this.state.undones);
+  };
+  changeTodo = (e) => {
+    e.currentTarget.style.display = "none";
+    e.currentTarget.nextSibling.style.display = "inline";
+    e.currentTarget.nextSibling.focus();
+  };
+  doneChangeTodo = (e) => {
+    if (!e.keyCode || e.keyCode === 13) {
+      let curInput = e.currentTarget;
+      let curSpan = e.currentTarget.previousSibling;
+      let curChecked = curSpan.previousSibling.checked;
+
+      let { todos, dones, undones } = this.state;
+      todos[todos.indexOf(curSpan.innerText)] = curInput.value;
+      if (curChecked) {
+        dones[dones.indexOf(curSpan.innerText)] = curInput.value;
+      }
+      else {
+        undones[undones.indexOf(curSpan.innerText)] = curInput.value;
+      }
+
+      curSpan.style.display = "inline";
+      curSpan.innerText = curInput.value;
+      curInput.style.display = "none";
+      console.log(this.state.todos, this.state.dones, this.state.undones);
+    }
   };
   showDelIcon = (e) => {
-    e.currentTarget.children[2].style.display = "inline";
+    e.currentTarget.children[3].style.display = "inline";
   };
   hideDelIcon = (e) => {
-    e.currentTarget.children[2].style.display = "none";
+    e.currentTarget.children[3].style.display = "none";
   };
   render() {
     return (
@@ -66,7 +95,8 @@ export default class Todo extends React.Component {
           return (
             <div key={index} className={css.todoItem} onMouseOver={this.showDelIcon} onMouseOut={this.hideDelIcon}>
               <input className={css.todoItemInput} type="checkbox" onClick={this.checkTodo} />
-              <input className={css.todoItemInput}value={item} />
+              <label className={css.todoItemText} onKeyDown={this.changeTodo} onDoubleClick={this.changeTodo}>{item}</label>
+              <input className={css.todoItemTextEditing} defaultValue={item} onBlur={this.doneChangeTodo} onKeyDown={this.doneChangeTodo} />
               <span className={css.todoItemDel} onClick={this.delTodo}>
                 ×
               </span>

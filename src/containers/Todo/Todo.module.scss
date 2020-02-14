@@ -25,21 +25,11 @@
   margin: 5px 0;
   padding: 5px;
   width: 80%;
-  font-size: 160%;
   border-radius: 8px;
   display: flex;
   flex-direction: row;
   align-items: center;
   position: relative;
-}
-.todoItem input {
-  font-size: 160%;
-  color: white;
-  background: transparent;
-}
-:global(.done) {
-  text-decoration: line-through;
-  color: #c7c7c7;
 }
 .todoItem:hover {
   border: white 1px solid;
@@ -70,10 +60,40 @@
   width: 10px;
   transform: rotate(-45deg);
 }
+.todoItemText{
+  font-size: 160%;
+  color: white;
+  background: transparent;
+  cursor: default;
+  width: 90%;
+  padding: 3px;
+  border: 1px #a7b3f3 solid;
+}
+:global(.done) {
+  font-size: 160%;
+  color: #c7c7c7;
+  text-decoration: line-through;
+  background: transparent;
+  width: 90%;
+  padding: 3px;
+  border: 1px #a7b3f3 solid;
+}
+.todoItemTextEditing {
+  display: none;
+  font-size: 160%;
+  font-family: inherit;
+  color: white;
+  background: transparent;
+  width: 90%;
+  outline: none;
+  padding: 3px;
+  border: 1px grey dashed;
+}
 .todoItemDel {
   position: absolute;
   right: 10px;
   display: none;
+  color: white;
 }
 .todoItemDel:hover {
   cursor: pointer;
