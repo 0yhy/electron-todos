@@ -66,7 +66,7 @@ export default class Todo extends React.Component {
           return (
             <div key={index} className={css.todoItem} onMouseOver={this.showDelIcon} onMouseOut={this.hideDelIcon}>
               <input className={css.todoItemInput} type="checkbox" onClick={this.checkTodo} />
-              <span>{item}</span>
+              <input className={css.todoItemInput}value={item} />
               <span className={css.todoItemDel} onClick={this.delTodo}>
                 ×
               </span>
