@@ -1,6 +1,7 @@
 // Modules to control application life and create native browser window
 const { app, BrowserWindow, globalShortcut } = require("electron");
 const path = require("path");
+const Datastore = require("nedb");
 
 function createWindow() {
   // Create the browser window.
@@ -31,6 +32,11 @@ app.on("ready", function() {
   createWindow();
   globalShortcut.register("CommandOrControl+I", function() {
     console.log("Ctrl+I");
+  });
+  console.log(app.getPath("userData"));
+  new Datastore({
+    autoload: true,
+    filename: path.join(app.getPath("userData"), "db/userinfo.db")
   });
 });
 
