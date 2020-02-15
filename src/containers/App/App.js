@@ -10,8 +10,8 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      // curTab: "calendar"
-      curTab: "todo"
+      curTab: "calendar"
+      // curTab: "todo"
     };
   }
   selectTab = (curTab) => {

@@ -8,6 +8,26 @@
   background-color: #ffe4e9;
   color: rgb(134, 131, 131);
 }
+.today {
+  color: red;
+}
+.menu {
+  display: none;
+  position: absolute;
+  background-color: #ffffff;
+  cursor: default;
+  list-style: none;
+  width: 120px;
+  li {
+    padding: 10px;
+  }
+  li:hover {
+    background-color: #f0f0f0;
+  }
+}
+.menuDone {
+  display: none;
+}
 .header {
   display: flex;
   flex-wrap: wrap;
@@ -22,16 +42,41 @@
   justify-content: space-around;
   height: 96%;
   width: 100%;
-  color: white;
+  color: rgb(254, 254, 191);
 }
 .bodyItem {
   background-color: rgba($color: #111111, $alpha: 0.15);
   width: 14%;
-  height: 16%;
+  height: 19%;
 }
-.bodyTextarea {
-  background-color: transparent;
-  width: 98%;
-  height: 85%;
-  resize: none;
+.curBodyItem {
+  background-color: rgba($color: #ff0000, $alpha: 0.15);
+  width: 14%;
+  height: 19%;
+}
+.bodyItemHeader {
+  display: flex;
+  align-items: center;
+}
+.bodyItemHeaderDate {
+  width: 70%;
+}
+.bodyItemHeaderMenu {
+  width: 30%;
+  display: none;
+  justify-content: space-around;
+}
+.bodyItemTodo {
+  display: flex;
+  flex-direction: column;
+  height: 75%;
+  cursor: default;
+}
+.bodyItemTodoDone {
+  color: grey;
+  text-decoration: line-through;
+}
+.icon {
+  width: 15px;
+  height: 15px;
 }

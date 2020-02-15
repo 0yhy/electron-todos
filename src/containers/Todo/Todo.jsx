@@ -1,7 +1,6 @@
 import React from "react";
 import css from "./Todo.module.scss";
-const low = window.low;
-const FileSync = window.FileSync;
+const db = window.db;
 
 export default class Todo extends React.Component {
   constructor() {
@@ -9,25 +8,18 @@ export default class Todo extends React.Component {
     this.state = {
       todos: [],
       dones: [],
-      undones: [],
-      db: null
+      undones: []
     };
   }
   componentDidMount = () => {
-    const apdater = new FileSync("userinfo.json");
-    let db = low(apdater);
-    this.setState({ db: db });
     let todoinfo = db.get("todo").value();
     this.setState({
       todos: todoinfo.todos,
       dones: todoinfo.dones,
       undones: todoinfo.undones
     });
-    setTimeout(() => {
-      console.log(this.state.todos);
-    }, 1000);
   };
-  componentWillUnmount = () => {
+  updateDatabase = () => {
     this.state.db
       .get("todo")
       .assign({ todos: this.state.todos, dones: this.state.dones, undones: this.state.undones })
@@ -43,6 +35,7 @@ export default class Todo extends React.Component {
         todos: todos,
         undones: undones
       });
+      this.updateDatabase();
       inputBar.value = "";
     }
   };
@@ -61,6 +54,7 @@ export default class Todo extends React.Component {
       dones.splice(dones.indexOf(curTodo), 1);
     }
     this.setState({ dones: dones, undones: undones });
+    this.updateDatabase();
     console.log(this.state.todos, this.state.dones, this.state.undones);
   };
   delTodo = (e) => {
@@ -76,6 +70,7 @@ export default class Todo extends React.Component {
       undones.splice(undones.indexOf(curTodo), 1);
     }
     this.setState({ todos: todos, dones: dones, undones: undones });
+    this.updateDatabase();
     console.log(this.state.todos, this.state.dones, this.state.undones);
   };
   changeTodo = (e) => {
@@ -96,6 +91,8 @@ export default class Todo extends React.Component {
       } else {
         undones[undones.indexOf(curSpan.innerText)] = curInput.value;
       }
+      this.setState({ todos: todos, dones: dones, undones: undones });
+      this.updateDatabase();
 
       curSpan.style.display = "inline";
       curSpan.innerText = curInput.value;
