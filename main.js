@@ -33,11 +33,6 @@ app.on("ready", function() {
   globalShortcut.register("CommandOrControl+I", function() {
     console.log("Ctrl+I");
   });
-  console.log(app.getPath("userData"));
-  new Datastore({
-    autoload: true,
-    filename: path.join(app.getPath("userData"), "db/userinfo.db")
-  });
 });
 
 // Quit when all windows are closed.

@@ -1,15 +1,38 @@
 import React from "react";
 import css from "./Todo.module.scss";
+const low = window.low;
+const FileSync = window.FileSync;
 
 export default class Todo extends React.Component {
   constructor() {
     super();
     this.state = {
-      todos: ["吃饭", "睡觉", "打豆豆", "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊"],
+      todos: [],
       dones: [],
-      undones: ["吃饭", "睡觉", "打豆豆", "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊"]
+      undones: [],
+      db: null
     };
   }
+  componentDidMount = () => {
+    const apdater = new FileSync("userinfo.json");
+    let db = low(apdater);
+    this.setState({ db: db });
+    let todoinfo = db.get("todo").value();
+    this.setState({
+      todos: todoinfo.todos,
+      dones: todoinfo.dones,
+      undones: todoinfo.undones
+    });
+    setTimeout(() => {
+      console.log(this.state.todos);
+    }, 1000);
+  };
+  componentWillUnmount = () => {
+    this.state.db
+      .get("todo")
+      .assign({ todos: this.state.todos, dones: this.state.dones, undones: this.state.undones })
+      .write();
+  };
   addTodo = (e) => {
     let inputBar = e.currentTarget;
     if (e.keyCode === 13 && inputBar.value.trim()) {
@@ -29,7 +52,7 @@ export default class Todo extends React.Component {
     let { dones, undones } = this.state;
     console.log("curTodo:", curTodo);
     if (e.currentTarget.checked) {
-      curTodoSpan.className = "done";
+      curTodoSpan.className = css.todoItemTextDone;
       dones.push(curTodo);
       undones.splice(undones.indexOf(curTodo), 1);
     } else {
@@ -70,8 +93,7 @@ export default class Todo extends React.Component {
       todos[todos.indexOf(curSpan.innerText)] = curInput.value;
       if (curChecked) {
         dones[dones.indexOf(curSpan.innerText)] = curInput.value;
-      }
-      else {
+      } else {
         undones[undones.indexOf(curSpan.innerText)] = curInput.value;
       }
 
@@ -94,9 +116,25 @@ export default class Todo extends React.Component {
         {this.state.todos.map((item, index) => {
           return (
             <div key={index} className={css.todoItem} onMouseOver={this.showDelIcon} onMouseOut={this.hideDelIcon}>
-              <input className={css.todoItemInput} type="checkbox" onClick={this.checkTodo} />
-              <label className={css.todoItemText} onKeyDown={this.changeTodo} onDoubleClick={this.changeTodo}>{item}</label>
-              <input className={css.todoItemTextEditing} defaultValue={item} onBlur={this.doneChangeTodo} onKeyDown={this.doneChangeTodo} />
+              <input
+                className={css.todoItemInput}
+                type="checkbox"
+                onClick={this.checkTodo}
+                defaultChecked={this.state.dones.indexOf(item) === -1 ? false : true}
+              />
+              <label
+                className={this.state.dones.indexOf(item) === -1 ? css.todoItemText : css.todoItemTextDone}
+                onKeyDown={this.changeTodo}
+                onDoubleClick={this.changeTodo}
+              >
+                {item}
+              </label>
+              <input
+                className={css.todoItemTextEditing}
+                defaultValue={item}
+                onBlur={this.doneChangeTodo}
+                onKeyDown={this.doneChangeTodo}
+              />
               <span className={css.todoItemDel} onClick={this.delTodo}>
                 ×
               </span>

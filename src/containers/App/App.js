@@ -10,18 +10,16 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      curTab: "calendar"
+      // curTab: "calendar"
+      curTab: "todo"
     };
   }
   selectTab = (curTab) => {
-    console.log(curTab);
-    console.log(this.state.curTab);
     this.setState({ curTab: curTab });
-    console.log(this.state.curTab);
-  }
+  };
   render() {
     return (
-      <div className={css.app} >
+      <div className={css.app}>
         <SideBar selectTab={this.selectTab}></SideBar>
         {this.state.curTab === "timetable" ? <Timetable></Timetable> : null}
         {this.state.curTab === "calendar" ? <Calendar></Calendar> : null}
@@ -30,4 +28,3 @@ export default class App extends React.Component {
     );
   }
 }
-

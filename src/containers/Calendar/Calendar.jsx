@@ -13,7 +13,6 @@ export default class Calendar extends React.Component {
   }
   componentDidMount = () => {
     this.setDaysData(this.getStartDateStr());
-    var db = new Datastore({ filename: `${app.getPath("userData")}/db/userinfo.db` });
   };
   getStartDateStr = () => {
     let curDateInfo = new Date();
@@ -51,13 +50,17 @@ export default class Calendar extends React.Component {
       <div className={css.calendar}>
         <div className={css.header}>
           {this.state.weeks.map((item, index) => {
-            return <span className={css.headerItem}>{item}</span>;
+            return (
+              <span className={css.headerItem} key={index}>
+                {item}
+              </span>
+            );
           })}
         </div>
         <div className={css.body}>
           {this.state.days.map((item, index) => {
             return (
-              <div className={css.bodyItem}>
+              <div className={css.bodyItem} key={index}>
                 <span data-dateinfo={item.info}>{item.date}</span>
                 <textarea className={css.bodyTextarea} onBlur={this.doneInput}></textarea>
               </div>
