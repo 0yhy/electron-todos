@@ -20,8 +20,7 @@ export default class Todo extends React.Component {
     });
   };
   updateDatabase = () => {
-    this.state.db
-      .get("todo")
+    db.get("todo")
       .assign({ todos: this.state.todos, dones: this.state.dones, undones: this.state.undones })
       .write();
   };
