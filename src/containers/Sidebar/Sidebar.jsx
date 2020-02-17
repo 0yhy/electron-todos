@@ -18,11 +18,15 @@ export default class Sidebar extends React.Component {
   render() {
     return (
       <div className={css.sidebar}>
-        <div className={`${css.sidebarItem}`} data-tabname="timetable" onClick={this.goToPage}>
+        <div
+          className={`${css.sidebarItem} ${css.currentSidebarItem}`}
+          data-tabname="timetable"
+          onClick={this.goToPage}
+        >
           <img className={css.sidebarIcon} src={require("../../assets/icon/time.png")} alt="img" />
           <span>周视图</span>
         </div>
-        <div className={`${css.sidebarItem} ${css.currentSidebarItem}`} data-tabname="calendar" onClick={this.goToPage}>
+        <div className={`${css.sidebarItem}`} data-tabname="calendar" onClick={this.goToPage}>
           <img className={css.sidebarIcon} src={require("../../assets/icon/calendar.png")} alt="img" />
           <span>月视图</span>
         </div>
