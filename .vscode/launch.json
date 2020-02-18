@@ -7,7 +7,7 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "electron-todos主进程debug",
+      "name": "主进程debug",
       "cwd": "${workspaceRoot}",
       "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/electron",
       "windows": {

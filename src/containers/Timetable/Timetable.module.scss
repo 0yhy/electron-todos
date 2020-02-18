@@ -4,5 +4,66 @@
 }
 .timetable {
   width: 100%;
+  height: 100%;
   background-color: #e7ecf0;
+}
+.header {
+  width: 100%;
+  height: 50px;
+  display: flex;
+}
+.headerTime {
+  width: 6%;
+  height: 100%;
+}
+.headerDays {
+  width: 94%;
+  display: flex;
+}
+.headerDaysItem {
+  display: flex;
+  flex-direction: column;
+  width: 14%;
+}
+.body {
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+  display: flex;
+}
+.body::-webkit-scrollbar {
+  display: none;
+}
+.bodyTime {
+  width: 6%;
+  height: 100%;
+  text-align: center;
+}
+.bodyTimeItem {
+  height: 70px;
+  box-sizing: border-box;
+  margin-top: -10px;
+}
+.bodyGrid {
+  width: 94%;
+  display: flex;
+}
+.bodyGridCol {
+  width: 14%;
+}
+.bodyGridColItem {
+  position: relative;
+  height: 60px;
+  border-top: 1px solid #aaabac;
+  border-right: 1px solid #aaabac;
+  box-sizing: border-box;
+}
+
+.block {
+  width: 95%;
+  height: 15px;
+  position: absolute;
+  background-color: #b3e1f7;
+  z-index: 10;
+  border-radius: 3px;
 }
